@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Build outputs
+dist/
+dist-electron/
+out/
+
+# Environment variables (APIキーを絶対にコミットしない)
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+*.pem
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/

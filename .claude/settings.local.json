@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(python3 -c \"import json,sys; p=json.load\\(sys.stdin\\); print\\('version:', p.get\\('version'\\)\\); print\\('exports:', list\\(p.get\\('exports', {}\\).keys\\(\\)\\)[:10]\\)\")",
+      "Bash(python3 -c \"import json,sys; p=json.load\\(sys.stdin\\); print\\('version:', p.get\\('version'\\)\\)\")",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite:*)",
+      "Bash(npm run:*)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(kill 40712 40734 40870 40890 40897 40896 40895 40893)",
+      "Bash(pkill -f \"Electron.app\")",
+      "Bash(xargs kill:*)",
+      "Bash(pkill -f \"concurrently\")",
+      "Bash(pkill -f \"vite\")",
+      "Bash(screencapture -x /tmp/notif-hub-screenshot.png)",
+      "Bash(screencapture -x /tmp/notif-hub-screen2.png)",
+      "Bash(screencapture -x /tmp/notif-hub-screen3.png)"
+    ]
+  }
+}
