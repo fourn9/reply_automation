@@ -309,27 +309,58 @@ const { width: w, height: h } = screen.getPrimaryDisplay().workAreaSize;
 win.setPosition(w - 380, h - 500);
 ```
 
-## 7. 開発の進め方
+## 7. 返信フローの設計（全サービス共通）
 
-### Phase 1: 骨組み + Agent SDK（1〜2日）
-1. Vite + React + TS + Electron セットアップ
-2. フローティングウィンドウ実装
-3. モック通知データ表示
-4. Agent SDK 連携（MCPなしでテキスト生成のみ）
-5. 「生成」ボタンで返信文生成、「送信」はコンソール出力
+このアプリの中心機能。Gmail の「AI で返信を作成」と同じ体験をすべてのサービスで実現する。
 
-### Phase 2: Gmail MCP接続（1〜2日）
-1. Gmail OAuth 認証フロー（必要な場合）
-2. MCP HTTP transport で Gmail MCP に接続
-3. 通知ポーリング（Gmail: search_threads などで未読取得）
-4. 返信生成 → 実送信のE2Eテスト
+```
+[通知一覧] → クリック → [通知詳細]
+                              ↓
+                        返信の概要を入力
+                        例:「明日中に共有予定と返信」
+                              ↓
+                        [✨ AI で下書き生成]
+                              ↓
+                        生成された返信文を表示
+                        ユーザーが編集可能
+                              ↓
+                        [承認して送信] ← MCP 経由で各サービスに実送信
+```
 
-### Phase 3: Slack / Notion / Figma 追加（各0.5〜1日）
-1. それぞれのMCPを mcp-config に追加
+**ポイント:**
+- AI 生成は任意。直接テキストを書いて送ることも可能
+- 生成後に編集してから送れる（承認フロー）
+- 送信先サービス（Gmail / Slack / Notion / Figma）は通知から自動判定
+- すべてこのウィンドウ1つで完結
+
+## 8. 開発の進め方
+
+### Phase 1: 骨組み + 直接返信（完了）
+1. Vite + React + TS + Electron セットアップ ✅
+2. フローティングウィンドウ（画面右下）✅
+3. モック通知3件表示（Slack / Gmail / Notion）✅
+4. 通知クリックで詳細画面に遷移 ✅
+5. 返信文を直接入力 → 「送信」はコンソール出力 ✅
+
+### Phase 2: AI 下書き生成機能（全サービス共通）
+1. Agent SDK 連携（MCP なし、テキスト生成のみ）
+2. 概要入力 →「AI で下書き生成」ボタン → 返信文を提案
+3. ユーザーが編集 or そのまま承認
+4. 「承認して送信」→ コンソール出力（実送信は Phase 3 以降）
+5. すべてのサービス（Gmail / Slack / Notion / Figma）共通のUIで動作確認
+
+### Phase 3: Gmail 実送信（MCP 接続）
+1. MCP HTTP transport で Gmail MCP に接続
+2. 通知ポーリング（未読メールを取得）
+3. AI 下書き → 承認 → Gmail に実送信 の E2E テスト
+
+### Phase 4: Slack / Notion / Figma 実送信
+1. それぞれの MCP を mcp-config に追加
 2. サービス別の通知取得ロジック
-3. 通知の重複排除と並び替え
+3. AI 下書き → 承認 → 各サービスに実送信
+4. 通知の重複排除と並び替え
 
-### Phase 4: 自動化と永続化（1日）
+### Phase 5: 自動化と永続化
 1. 起動時に通知をローカル保存（electron-store）
-2. ポーリング間隔の設定UI
-3. 通知のmacOSネイティブ通知化（Notification API）
+2. 自動ポーリング間隔の設定 UI
+3. 未読通知の macOS ネイティブ通知化（Notification API）
