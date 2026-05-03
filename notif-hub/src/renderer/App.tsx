@@ -2,11 +2,18 @@
 // 画面状態: list (通知一覧) | detail (通知詳細)
 
 import { useState } from 'react';
-import type { Notification } from '../shared/types';
+import type { Notification, ServiceType } from '../shared/types';
 import { Header } from './components/Header';
 import { NotificationList } from './components/NotificationList';
 import { NotificationDetail } from './components/NotificationDetail';
 import { useNotifications } from './hooks/useNotifications';
+
+const SERVICE_LABEL: Record<ServiceType, string> = {
+  slack: 'Slack',
+  gmail: 'Gmail',
+  notion: 'Notion',
+  figma: 'Figma',
+};
 
 type View = { type: 'list' } | { type: 'detail'; notification: Notification };
 
@@ -30,7 +37,7 @@ export default function App() {
       ) : (
         <Header
           onBack={handleBack}
-          title={`← ${view.notification.service === 'slack' ? 'Slack' : view.notification.service === 'gmail' ? 'Gmail' : 'Notion'}`}
+          title={SERVICE_LABEL[view.notification.service]}
         />
       )}
 

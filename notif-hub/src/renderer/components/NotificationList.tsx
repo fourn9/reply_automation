@@ -48,7 +48,7 @@ export function NotificationList({
           <button
             key={notif.id}
             onClick={() => onSelect(notif)}
-            className="w-full text-left px-3 py-2.5 border-b border-gray-700/50 hover:bg-gray-700/40 transition-colors"
+            className="relative w-full text-left px-3 py-2.5 border-b border-gray-700/50 hover:bg-gray-700/40 transition-colors"
           >
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-1.5">
