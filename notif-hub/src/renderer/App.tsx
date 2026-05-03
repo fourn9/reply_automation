@@ -56,7 +56,7 @@ export default function App() {
                   onClick={refresh}
                   className="w-full text-xs text-gray-500 hover:text-gray-300 transition-colors"
                 >
-                  🔄 更新
+                  更新
                 </button>
               </div>
             </>

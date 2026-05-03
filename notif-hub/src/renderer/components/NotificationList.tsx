@@ -5,12 +5,12 @@ import type { Notification, ServiceType } from '../../shared/types';
 // サービスごとのアイコンと色設定
 const SERVICE_CONFIG: Record<
   ServiceType,
-  { icon: string; label: string; color: string }
+  { label: string; color: string }
 > = {
-  slack: { icon: '🟢', label: 'Slack', color: 'text-green-400' },
-  gmail: { icon: '📧', label: 'Gmail', color: 'text-red-400' },
-  notion: { icon: '📝', label: 'Notion', color: 'text-gray-300' },
-  figma: { icon: '🎨', label: 'Figma', color: 'text-purple-400' },
+  slack: { label: 'Slack', color: 'text-green-400' },
+  gmail: { label: 'Gmail', color: 'text-red-400' },
+  notion: { label: 'Notion', color: 'text-gray-300' },
+  figma: { label: 'Figma', color: 'text-purple-400' },
 };
 
 function formatTime(timestamp: number): string {
@@ -52,7 +52,6 @@ export function NotificationList({
           >
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-1.5">
-                <span className="text-xs">{svc.icon}</span>
                 <span className={`text-xs font-medium ${svc.color}`}>
                   {svc.label}
                 </span>

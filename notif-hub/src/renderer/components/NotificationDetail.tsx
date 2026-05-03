@@ -4,11 +4,11 @@
 import type { Notification, ServiceType } from '../../shared/types';
 import { ReplyComposer } from './ReplyComposer';
 
-const SERVICE_CONFIG: Record<ServiceType, { icon: string; label: string }> = {
-  slack: { icon: '🟢', label: 'Slack' },
-  gmail: { icon: '📧', label: 'Gmail' },
-  notion: { icon: '📝', label: 'Notion' },
-  figma: { icon: '🎨', label: 'Figma' },
+const SERVICE_CONFIG: Record<ServiceType, { label: string }> = {
+  slack: { label: 'Slack' },
+  gmail: { label: 'Gmail' },
+  notion: { label: 'Notion' },
+  figma: { label: 'Figma' },
 };
 
 function formatTime(timestamp: number): string {
@@ -31,7 +31,6 @@ export function NotificationDetail({ notification }: NotificationDetailProps) {
       {/* 元メッセージ */}
       <div className="px-3 py-2.5 border-b border-gray-700/50">
         <div className="flex items-center gap-1.5 mb-1">
-          <span className="text-xs">{svc.icon}</span>
           <span className="text-xs text-gray-400">
             {svc.label}
             {notification.channel && ` ${notification.channel}`}

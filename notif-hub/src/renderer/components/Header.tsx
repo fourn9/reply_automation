@@ -23,7 +23,7 @@ export function Header({ onBack, title = 'Notif Hub' }: HeaderProps) {
             ←
           </button>
         ) : (
-          <span className="text-gray-400 text-sm">☰</span>
+          <span className="text-gray-400 text-sm">—</span>
         )}
         <span className="text-white text-sm font-semibold">{title}</span>
       </div>

@@ -69,7 +69,7 @@ export function ReplyComposer({ notification }: ReplyComposerProps) {
   if (sent) {
     return (
       <div className="p-3 text-center space-y-2">
-        <div className="text-green-400 text-sm font-medium">✓ 送信しました</div>
+        <div className="text-green-400 text-sm font-medium">送信しました</div>
         <div className="text-gray-500 text-xs">（Phase 3 以降で実送信に切り替わります）</div>
         <button
           onClick={() => {
@@ -98,7 +98,7 @@ export function ReplyComposer({ notification }: ReplyComposerProps) {
               : 'text-gray-400 hover:text-gray-200'
           }`}
         >
-          ✨ AI 下書き
+          AI 下書き
         </button>
         <button
           onClick={() => setMode('direct')}
@@ -108,7 +108,7 @@ export function ReplyComposer({ notification }: ReplyComposerProps) {
               : 'text-gray-400 hover:text-gray-200'
           }`}
         >
-          ✏️ 直接入力
+          直接入力
         </button>
       </div>
 
@@ -137,7 +137,7 @@ export function ReplyComposer({ notification }: ReplyComposerProps) {
               disabled={!summary.trim() || isGenerating}
               className="mt-1.5 w-full bg-blue-600/80 hover:bg-blue-500/80 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-medium py-1.5 rounded transition-colors"
             >
-              {isGenerating ? '⏳ 生成中...' : '✨ AI で下書き生成  ⌘↵'}
+              {isGenerating ? '生成中...' : 'AI で下書き生成  ⌘↵'}
             </button>
           </div>
 
@@ -165,14 +165,14 @@ export function ReplyComposer({ notification }: ReplyComposerProps) {
                   disabled={isGenerating}
                   className="flex-1 border border-gray-600/50 text-gray-400 hover:text-gray-200 text-xs py-1.5 rounded transition-colors disabled:opacity-40"
                 >
-                  🔄 再生成
+                  再生成
                 </button>
                 <button
                   onClick={handleSend}
                   disabled={!draft.trim() || isSending}
                   className="flex-[2] bg-green-600/80 hover:bg-green-500/80 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-medium py-1.5 rounded transition-colors"
                 >
-                  {isSending ? '送信中...' : '✅ 承認して送信'}
+                  {isSending ? '送信中...' : '承認して送信'}
                 </button>
               </div>
             </div>
@@ -194,7 +194,7 @@ export function ReplyComposer({ notification }: ReplyComposerProps) {
             disabled={!directText.trim() || isSending}
             className="w-full bg-blue-600/80 hover:bg-blue-500/80 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-medium py-2 rounded transition-colors"
           >
-            {isSending ? '送信中...' : '📤 送信'}
+            {isSending ? '送信中...' : '送信'}
           </button>
         </>
       )}
